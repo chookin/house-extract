@@ -1,0 +1,140 @@
+<configuration>
+    <property>
+        <name>cli.paras</name>
+        <value></value>
+        <description>if not given parameters for cli, then use cli.paras</description>
+    </property>
+
+    <property>
+        <name>page.validPeriod</name>
+        <value>-1</value>
+        <description>unit is second. For a month is 3600*24*30=2592000. If 0, is not save and not read from local cache;
+            if negative, always read from local cache if exists
+        </description>
+    </property>
+    <property>
+        <name>download.concurrent.num</name>
+        <value>16</value>
+    </property>
+    <property>
+        <name>download.timeout</name>
+        <value>20000</value>
+        <description>socket timeout in milliseconds</description>
+    </property>
+    <property>
+        <name>download.sleepMilliseconds</name>
+        <value>20</value>
+        <description>sleep milliseconds when between two web page download</description>
+    </property>
+
+    <property>
+        <name>results.directory</name>
+        <value>${user.home}/share/project/tagbase/results</value>
+    </property>
+
+    <!--utils-->
+    <property>
+        <name>proxy.enable</name>
+        <value>true1</value>
+        <description>whether using proxy, value is true | false</description>
+    </property>
+    <property>
+        <name>proxy.host</name>
+        <value>proxy.cmcc</value>
+    </property>
+    <property>
+        <name>proxy.port</name>
+        <value>8080</value>
+    </property>
+    <property>
+        <name>proxy.user</name>
+        <value>""</value>
+    </property>
+    <property>
+        <name>proxy.password</name>
+        <value>""</value>
+    </property>
+    <property>
+        <name>proxy.pool</name>
+        <value>
+            # http://www.xici.net.co/nt/
+            61.232.6.164:8081#北京
+            183.207.228.9:89#移动
+            222.88.236.236:82#河南南阳
+            58.240.65.57:3128#江苏南京
+            183.207.232.193:8080#移动
+            59.151.103.15:80#北京
+
+            # http://www.brieftools.info/proxy/
+            119.226.246.89:8080
+            203.144.144.162:8080
+            58.213.19.134:2311
+            60.55.43.3:3128
+            183.209.233.121:8123
+            202.106.169.228:8080
+            60.55.42.177:3128
+            58.212.223.210:8118
+            117.170.220.12:8123
+            219.93.183.106:8080
+            59.151.103.15:80
+            117.173.203.201:8123
+            223.64.35.179:8123
+        </value>
+        <description>Proxy list, separate by "\n" or ",", skip the line start with "#". Notice: choose proxy that in
+            land and with high speed.
+        </description>
+    </property>
+    <property>
+        <name>test.url</name>
+        <value>www.126.com</value>
+        <!--<value>http://yuedu.baidu.com/book/list/6032</value>-->
+        <description>used to validate proxy usable.</description>
+    </property>
+    <property>
+        <name>mongo.host</name>
+        <value>mongomaster</value>
+    </property>
+    <property>
+        <name>mongo.port</name>
+        <value>27017</value>
+    </property>
+    <property>
+        <name>mongo.user</name>
+        <value></value>
+    </property>
+    <property>
+        <name>mongo.password</name>
+        <value></value>
+    </property>
+    <property>
+        <name>mongo.database</name>
+        <value>house</value>
+    </property>
+    <property>
+        <name>redis.host</name>
+        <value>redismaster</value>
+    </property>
+    <property>
+        <name>redis.port</name>
+        <value>6379</value>
+    </property>
+    <!--etl-commons-->
+    <property>
+        <name>mobile.userAgent</name>
+        <value>Mozilla/5.0 (Linux; Android 4.4.2; M812C Build/KVT49L) AppleWebKit/537.36 (KHTML, like Gecko)
+            Chrome/39.0.2171.59 Mobile Safari/537.36
+        </value>
+        <description>default userAgent, view: http://whatsmyuseragent.com/</description>
+    </property>
+    <property>
+        <name>web.userAgent</name>
+        <value>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95
+            Safari/537.36
+        </value>
+        <description>to view your browser's userAgent, please access http://whatsmyuseragent.com/</description>
+    </property>
+    <property>
+        <name>page.download.directory</name>
+        <value>${user.home}/share/stock</value>
+    </property>
+</configuration>
