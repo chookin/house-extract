@@ -39,7 +39,7 @@
                         <manifest>
                             <!--http://maven.apache.org/shared/maven-archiver/examples/classpath.html-->
                             <addClasspath>true</addClasspath>
-                            <mainClass>chookin.service.TagCli</mainClass>
+                            <mainClass>chookin.house.service.TagCli</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>

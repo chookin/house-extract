@@ -12,6 +12,13 @@ public class TagCli extends BaseOper {
 
     @Override
     public boolean action() {
+        if(getOptionParser().existOption("dump-config")){
+            return new ConfigProcess(getArgs()).action();
+        }
         return false;
+    }
+
+    public static void main(String[] args){
+        new TagCli(args).action();
     }
 }

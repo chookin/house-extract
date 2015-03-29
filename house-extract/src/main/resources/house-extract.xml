@@ -4,7 +4,6 @@
         <value></value>
         <description>if not given parameters for cli, then use cli.paras</description>
     </property>
-
     <property>
         <name>page.validPeriod</name>
         <value>-1</value>
@@ -14,7 +13,7 @@
     </property>
     <property>
         <name>download.concurrent.num</name>
-        <value>16</value>
+        <value>1</value>
     </property>
     <property>
         <name>download.timeout</name>

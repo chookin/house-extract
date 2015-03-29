@@ -105,6 +105,7 @@ public class HousePipeline implements Pipeline {
         HouseDAO dao = HouseDAO.getInstance();
         try{
             count.addAndGet(dao.save(houses));
+            LOG.trace("dump "+houses.size()+" houses");
         }finally {
             dao.close();
         }
