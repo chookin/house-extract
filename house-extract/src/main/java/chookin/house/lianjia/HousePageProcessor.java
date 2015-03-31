@@ -6,8 +6,10 @@ import cmri.etl.common.Request;
 import cmri.etl.common.ResultItems;
 import cmri.etl.downloader.CasperJsDownloader;
 import cmri.etl.processor.PageProcessor;
+import cmri.utils.lang.DateHelper;
 import cmri.utils.lang.StringHelper;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +21,7 @@ import java.util.Set;
  * Created by zhuyin on 3/28/15.
  */
 public class HousePageProcessor implements PageProcessor {
-    private static final Logger LOG = Logger.getLogger(HousePageProcessor.class);
+    private static final Log LOG = LogFactory.getLog(HousePageProcessor.class);
     static PageProcessor processor = new HousePageProcessor();
 
     public static Set<Request> getSeedRequests(){
@@ -27,13 +29,15 @@ public class HousePageProcessor implements PageProcessor {
         requests.add(new Request("http://bj.lianjia.com/ershoufang/")
                         .setPageProcessor(processor)
                         .setDownloader(CasperJsDownloader.getInstance())
-//                        .ignoreCache(true)
+                        .putExtra("category", "2hand")
+                        .putExtra("validateMilliSeconds", DateHelper.DAY_MILLISECONDS)
         );
         return requests;
     }
     @Override
     public void process(ResultItems page) {
         Document doc = (Document) page.getResource();
+        String category = page.getRequest().getExtra("category", String.class);
         Elements elements = doc.select("#house-lst > li");
         for (Element element : elements) {
             House house = new House();
@@ -44,7 +48,8 @@ public class HousePageProcessor implements PageProcessor {
             house.setName(name)
                     .setSite(SiteName.Lianjia)
                     .setUrl(url)
-                    .setCode(code);
+                    .setCode(code)
+                    .set("category", category);
 
             item = element.select(".zone").first();
             house.set("type", item.text());//户型
@@ -102,6 +107,7 @@ public class HousePageProcessor implements PageProcessor {
                 page.addTargetRequest(new Request(url)
                                 .setPriority(7)
                                 .setPageProcessor(processor)
+                                .putExtra("validateMilliSeconds", DateHelper.DAY_MILLISECONDS)
                 );
             }
         }

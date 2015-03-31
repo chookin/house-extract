@@ -3,8 +3,8 @@ package chookin.house.lianjia;
 import chookin.house.House;
 import cmri.etl.common.ResultItems;
 import cmri.etl.processor.PageProcessor;
-import cmri.utils.lang.StringHelper;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by zhuyin on 3/28/15.
  */
 public class HouseDetailPageProcessor implements PageProcessor {
-    private static final Logger LOG = Logger.getLogger(HouseDetailPageProcessor.class);
+    private static final Log LOG = LogFactory.getLog(HouseDetailPageProcessor.class);
     private static HouseDetailPageProcessor processor = new HouseDetailPageProcessor();
     public static HouseDetailPageProcessor getInstance(){
         return processor;
@@ -35,9 +35,7 @@ public class HouseDetailPageProcessor implements PageProcessor {
             house.set("region", element.text());
         }
 
-        String text = doc.text();
-
-        house.set("floor", StringHelper.parseRegex(text, "楼层：([\\w]+楼)", 1));
+        house.set("floor", getFloor(doc));
 
         Elements elements = doc.select(".items.clear .content");
         List<String> comments = new ArrayList<>();
@@ -50,5 +48,17 @@ public class HouseDetailPageProcessor implements PageProcessor {
         }
         LOG.trace(house);
         page.setField("house", house);
+    }
+
+    private String getFloor(Document doc){
+        Element element = doc.select("div.info-box.left > div.desc-text.clear > dl:nth-child(7) > dd").first();
+        if(element != null) {
+            String floor = element.text();
+            if (floor.contains("楼")) {
+                return floor;
+            }
+        }
+        LOG.warn("Fail to parse floor of " + doc.baseUri());
+        return null;
     }
 }
